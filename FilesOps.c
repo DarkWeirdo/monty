@@ -13,24 +13,24 @@ FILE *fd = fopen(FileName, "r");
 if (FileName == NULL || fd == NULL)
 Error(2, FileName);
 
-read(fd);
+Read(fd);
 fclose(fd);
 }
 
 
 /**
-* read - reads file
+* Read - Reads file
 * @fd: points to file descriptor
 * Return: none since void function
 */
 
-void read(FILE *fd)
+void Read(FILE *fd)
 {
 int LineNumber, format = 0;
 char *buffer = NULL;
 size_t len = 0;
 
-for (LineNumber = 1; getline(&buffer, &len, fd) != -1; LineNumber++)
+for (LineNumber = 1; (getline(&buffer, &len, fd) != -1); LineNumber++)
 {
 format = ParseLine(buffer, LineNumber, format);
 }
@@ -53,19 +53,19 @@ int i;
 int flag;
 
 instruction_t func_list[] = {
-{"push", add_to_stack},
-{"pall", print_stack},
-{"pint", print_top},
-{"pop", pop_top},
+{"push", Add2Stack},
+{"pall", PrintStack},
+{"pint", PrintTop},
+{"pop", PopTop},
 {"nop", nop},
-{"swap", swap_nodes},
-{"add", add_nodes},
-{"sub", sub_nodes},
-{"div", div_nodes},
-{"mul", mul_nodes},
-{"mod", mod_nodes},
-{"pchar", print_char},
-{"pstr", print_str},
+{"swap", SwapNodes},
+{"add", AddNodes},
+{"sub", SubNodes},
+{"div", DivNodes},
+{"mul", MulNodes},
+{"mod", ModNodes},
+{"pchar", PrintChar},
+{"pstr", PrintStr},
 {"rotl", rotl},
 {"rotr", rotr},
 {NULL, NULL}
@@ -96,7 +96,7 @@ Error(3, LineNumber, opcode);
 * @format: Format specifier. If 0 Nodes will be entered as a stack.
 * if 1 nodes will be entered as a queue.
 */
-void CallFunc(op_func func, char *op, char *val, int LineNumber, int format)
+void CallFunc(op_funct func, char *op, char *val, int LineNumber, int format)
 {
 stack_t *node;
 int flag;
@@ -117,11 +117,11 @@ for (i = 0; val[i] != '\0'; i++)
 if (isdigit(val[i]) == 0)
 Error(5, LineNumber);
 }
-node = create_node(atoi(val) * flag);
+node = CreateNode(atoi(val) * flag);
 if (format == 0)
 func(&node, LineNumber);
 if (format == 1)
-add_to_queue(&node, LineNumber);
+Add2Queue(&node, LineNumber);
 }
 else
 func(&head, LineNumber);

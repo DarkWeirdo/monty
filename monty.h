@@ -1,5 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
+
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -36,10 +38,10 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef void (*op_function)(stack_t **, unsigned int);
+typedef void (*op_funct)(stack_t **, unsigned int);
 extern stack_t *head;
 void open(char *FileName);
-void read(FILE *);
+void Read(FILE *);
 int length_chars(FILE *);
 void FindFunct(char *, char *, int, int);
 int ParseLine(char *buffer, int LineNumber, int format);
@@ -52,7 +54,7 @@ void PopTop(stack_t **, unsigned int);
 void PrintTop(stack_t **, unsigned int);
 void SwapNodes(stack_t **, unsigned int);
 void nop(stack_t **, unsigned int);
-void CallFunc(op_function, char *, char *, int, int);
+void CallFunc(op_funct, char *, char *, int, int);
 void AddNodes(stack_t **, unsigned int);
 void SubNodes(stack_t **, unsigned int);
 void DivNodes(stack_t **, unsigned int);

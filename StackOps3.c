@@ -39,11 +39,11 @@ free((*stack)->prev);
 }
 
 /**
-* div_nodes - Adds the top two elements of the stack.
-* @stack: Pointing to a pointer pointing to top node of the stack.
+* DivNodes - Adds the top two elements of the stack.
+* @stack: Points to a pointer pointing to top node of the stack.
 * @LineNumber: line number of of the opcode.
 */
-void div_nodes(stack_t **stack, unsigned int LineNumber)
+void DivNodes(stack_t **stack, unsigned int LineNumber)
 {
 int sum;
 if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
